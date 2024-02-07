@@ -36,4 +36,20 @@ public class BankAccount {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public boolean getAccountType(){
+        return this.accountType;
+    }
+
+    public void setAccountType(boolean newType){
+        this.accountType = newType;
+    }
 }
