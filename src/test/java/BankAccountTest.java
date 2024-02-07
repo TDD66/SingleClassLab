@@ -11,7 +11,7 @@ public class BankAccountTest {
     private BankAccount bankAccount;
     @BeforeEach
     public void setUp(){
-        bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true);
+        bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true, 0);
     }
     @Test
     public void canGetFirstName(){
@@ -81,6 +81,57 @@ public class BankAccountTest {
         bankAccount.setAccountType(newAccountType);
         boolean result = bankAccount.getAccountType();
         assertThat(result).isEqualTo(newAccountType);
+    }
+
+    @Test
+    public void canGetAccountNumber(){
+        // ARRANGE, ACT, ASSERT
+        int result = bankAccount.getAccountNumber();
+        int expected = 12345678;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void canSetAccountNumber(){
+        // ARRANGE, ACT, ASSERT
+        int newAccountNumber = 999;
+        bankAccount.setAccountNumber(newAccountNumber);
+        int result = bankAccount.getAccountNumber();
+        assertThat(result).isEqualTo(newAccountNumber);
+    }
+
+    @Test
+    public void canGetBalance(){
+        // ARRANGE, ACT, ASSERT
+        int result = bankAccount.getBalance();
+        int expected = 0;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void canSetBalance(){
+        // ARRANGE, ACT, ASSERT
+        int newBalance = 100000;
+        bankAccount.setBalance(newBalance);
+        int result = bankAccount.getBalance();
+        assertThat(result).isEqualTo(newBalance);
+    }
+
+    @Test
+    public void canGetOverdraft(){
+        // ARRANGE, ACT, ASSERT
+        int result = bankAccount.getOverdraft();
+        int expected = 0;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void canSetOverdraft(){
+        // ARRANGE, ACT, ASSERT
+        int newOverdraft = 123121;
+        bankAccount.setOverdraft(newOverdraft);
+        int result = bankAccount.getOverdraft();
+        assertThat(result).isEqualTo(newOverdraft);
     }
 
 }
