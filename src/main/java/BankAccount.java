@@ -34,6 +34,17 @@ public class BankAccount {
         }
     }
 
+    public void payInterest(){
+        if(this.accountType){
+            int balanceMultiplied = this.balance * 120;
+            this.balance = Math.floorDiv(balanceMultiplied, 100);
+        }
+        if(!this.accountType){
+            int balanceMultiplied = this.balance * 110;
+            this.balance = Math.floorDiv(balanceMultiplied, 100);
+        }
+    }
+
     // Getters and Setters
 
     public String getFirstName() {
