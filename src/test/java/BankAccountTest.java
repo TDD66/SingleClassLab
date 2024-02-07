@@ -15,4 +15,15 @@ public class BankAccountTest {
         String expected = "FirstName";
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    public void canSetFirstName(){
+        // ARRANGE, ACT, ASSERT
+        BankAccount bankAccount;
+        bankAccount = new BankAccount(null, "LastName", LocalDate.of(2001, 2, 12), true);
+        String newName = "FirstName";
+        bankAccount.setFirstName(newName);
+        String result = bankAccount.getFirstName();
+        assertThat(result).isEqualTo(newName);
+    }
 }

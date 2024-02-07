@@ -24,4 +24,8 @@ public class BankAccount {
     public String getFirstName() {
         return this.firstName;
     }
+
+    public void setFirstName(String newName){
+        this.firstName = newName;
+    }
 }
