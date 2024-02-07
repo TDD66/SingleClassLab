@@ -14,7 +14,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void testDeposit(){
+    public void testPositiveDeposit(){
         // ARRANGE, ACT, ASSERT
         int depositAmount = 50;
         int originalBalance = bankAccount.getBalance();
@@ -22,8 +22,16 @@ public class BankAccountTest {
         int newBalance = bankAccount.getBalance();
         int result = newBalance - originalBalance;
         assertThat(result).isEqualTo(depositAmount);
+    }
 
-
+    @Test
+    public void testNegativeDeposit(){
+        // ARRANGE, ACT, ASSERT
+        int depositAmount = -50;
+        int originalBalance = bankAccount.getBalance();
+        bankAccount.deposit(depositAmount);
+        int newBalance = bankAccount.getBalance();
+        assertThat(newBalance).isEqualTo(originalBalance);
     }
     @Test
     public void testGetFirstName(){

@@ -23,7 +23,9 @@ public class BankAccount {
     // Class Methods
 
     public void deposit(int depositAmount){
-        this.balance += depositAmount;
+        if(depositAmount > 0){
+            this.balance += depositAmount;
+        }
     }
 
     // Getters and Setters
