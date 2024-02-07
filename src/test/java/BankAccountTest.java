@@ -10,7 +10,8 @@ public class BankAccountTest {
     private BankAccount bankAccount;
     @BeforeEach
     public void setUp(){
-        bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), false, 100);
+        bankAccount = new BankAccount("FirstName", "LastName",
+                LocalDate.of(2001, 2, 12), false, 100);
     }
 
     @Test
@@ -69,12 +70,30 @@ public class BankAccountTest {
     @Test
     public void testPayInterestCurrentAccount(){
         bankAccount.setBalance(100);
-        double originalBalance = 100;
         bankAccount.payInterest();
-        double result = bankAccount.getBalance();
-        double expected = 110;
+        int result = bankAccount.getBalance();
+        int expected = 110;
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    public void testPayInterestSavingsAccount(){
+        bankAccount.setAccountType(true);
+        bankAccount.setBalance(100);
+        bankAccount.payInterest();
+        int result = bankAccount.getBalance();
+        int expected = 120;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void testPayInterestWithZeroBalance(){
+        bankAccount.setBalance(0);
+        bankAccount.payInterest();
+        int result = bankAccount.getBalance();
+        assertThat(result).isZero();
+    }
+
     @Test
     public void testGetFirstName(){
         // ARRANGE, ACT, ASSERT
@@ -132,7 +151,7 @@ public class BankAccountTest {
     public void testGetAccountType(){
         // ARRANGE, ACT, ASSERT
         boolean result = bankAccount.getAccountType();
-        boolean expected = true;
+        boolean expected = false;
         assertThat(result).isEqualTo(expected);
     }
 
