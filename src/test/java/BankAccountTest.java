@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class BankAccountTest {
 
     @Test
@@ -9,5 +11,8 @@ public class BankAccountTest {
         // ARRANGE, ACT, ASSERT
         BankAccount bankAccount;
         bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true);
+        String result = bankAccount.getFirstName();
+        String expected = "FirstName";
+        assertThat(result).isEqualTo(expected);
     }
 }

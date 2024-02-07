@@ -18,4 +18,10 @@ public class BankAccount {
         this.accountNumber = 12345678;
         this.balance = 0;
     }
+
+    // Getters and Setters
+
+    public String getFirstName() {
+        return this.firstName;
+    }
 }
