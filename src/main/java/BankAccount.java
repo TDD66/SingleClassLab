@@ -28,4 +28,12 @@ public class BankAccount {
     public void setFirstName(String newName){
         this.firstName = newName;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
