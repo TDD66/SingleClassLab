@@ -10,7 +10,7 @@ public class BankAccountTest {
     private BankAccount bankAccount;
     @BeforeEach
     public void setUp(){
-        bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true, 0);
+        bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true, 100);
     }
 
     @Test
@@ -31,6 +31,38 @@ public class BankAccountTest {
         int originalBalance = bankAccount.getBalance();
         bankAccount.deposit(depositAmount);
         int newBalance = bankAccount.getBalance();
+        assertThat(newBalance).isEqualTo(originalBalance);
+    }
+
+    @Test
+    public void testWithdrawal(){
+        // ARRANGE, ACT, ASSERT
+        bankAccount.deposit(50);
+        int originalBalance = bankAccount.getBalance();
+        int withdrawalAmount = 30;
+        bankAccount.withdrawal(withdrawalAmount);
+        int newBalance = bankAccount.getBalance();
+        int result = originalBalance - newBalance;
+        assertThat(result).isEqualTo(withdrawalAmount);
+    }
+
+    @Test
+    public void testWithdrawalOfMoreMoneyThanInAccount(){
+        int originalBalance = bankAccount.getBalance();
+        int withdrawalAmount = originalBalance + 10;
+        bankAccount.withdrawal(withdrawalAmount);
+        int newBalance = bankAccount.getBalance();
+        bankAccount.withdrawal(withdrawalAmount);
+        assertThat(newBalance).isEqualTo(originalBalance);
+    }
+
+    @Test
+    public void testNegativeWithdrawalAmount(){
+        int originalBalance = bankAccount.getBalance();
+        int withdrawalAmount = -50;
+        bankAccount.withdrawal(withdrawalAmount);
+        int newBalance = bankAccount.getBalance();
+        bankAccount.withdrawal(withdrawalAmount);
         assertThat(newBalance).isEqualTo(originalBalance);
     }
     @Test
@@ -141,7 +173,7 @@ public class BankAccountTest {
     public void testGetOverdraft(){
         // ARRANGE, ACT, ASSERT
         int result = bankAccount.getOverdraft();
-        int expected = 0;
+        int expected = 100;
         assertThat(result).isEqualTo(expected);
     }
 
