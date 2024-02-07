@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.extractProperty;
 
 public class BankAccountTest {
 
@@ -13,8 +12,21 @@ public class BankAccountTest {
     public void setUp(){
         bankAccount = new BankAccount("FirstName", "LastName", LocalDate.of(2001, 2, 12), true, 0);
     }
+
     @Test
-    public void canGetFirstName(){
+    public void testDeposit(){
+        // ARRANGE, ACT, ASSERT
+        int depositAmount = 50;
+        int originalBalance = bankAccount.getBalance();
+        bankAccount.deposit(depositAmount);
+        int newBalance = bankAccount.getBalance();
+        int result = newBalance - originalBalance;
+        assertThat(result).isEqualTo(depositAmount);
+
+
+    }
+    @Test
+    public void testGetFirstName(){
         // ARRANGE, ACT, ASSERT
         String result = bankAccount.getFirstName();
         String expected = "FirstName";
@@ -22,7 +34,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetFirstName(){
+    public void testSetFirstName(){
         // ARRANGE, ACT, ASSERT
         String newName = "NewFirstName";
         bankAccount.setFirstName(newName);
@@ -32,7 +44,7 @@ public class BankAccountTest {
 
 
     @Test
-    public void canGetLastName(){
+    public void testGetLastName(){
         // ARRANGE, ACT, ASSERT
         String result = bankAccount.getLastName();
         String expected = "LastName";
@@ -40,7 +52,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetLastName(){
+    public void testSetLastName(){
         // ARRANGE, ACT, ASSERT
         String newName = "NewLastName";
         bankAccount.setLastName(newName);
@@ -50,7 +62,7 @@ public class BankAccountTest {
 
 
     @Test
-    public void canGetDateOfBirth(){
+    public void testGetDateOfBirth(){
         // ARRANGE, ACT, ASSERT
         LocalDate result = bankAccount.getDateOfBirth();
         LocalDate expected = LocalDate.of(2001, 2, 12);
@@ -58,7 +70,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetDateOfBirth(){
+    public void testSetDateOfBirth(){
         // ARRANGE, ACT, ASSERT
         LocalDate newDOB = LocalDate.of(5000, 1, 1);
         bankAccount.setDateOfBirth(newDOB);
@@ -67,7 +79,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canGetAccountType(){
+    public void testGetAccountType(){
         // ARRANGE, ACT, ASSERT
         boolean result = bankAccount.getAccountType();
         boolean expected = true;
@@ -75,7 +87,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetAccountType(){
+    public void testSetAccountType(){
         // ARRANGE, ACT, ASSERT
         boolean newAccountType = false;
         bankAccount.setAccountType(newAccountType);
@@ -84,7 +96,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canGetAccountNumber(){
+    public void testGetAccountNumber(){
         // ARRANGE, ACT, ASSERT
         int result = bankAccount.getAccountNumber();
         int expected = 12345678;
@@ -92,7 +104,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetAccountNumber(){
+    public void testSetAccountNumber(){
         // ARRANGE, ACT, ASSERT
         int newAccountNumber = 999;
         bankAccount.setAccountNumber(newAccountNumber);
@@ -101,7 +113,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canGetBalance(){
+    public void testGetBalance(){
         // ARRANGE, ACT, ASSERT
         int result = bankAccount.getBalance();
         int expected = 0;
@@ -109,7 +121,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetBalance(){
+    public void testSetBalance(){
         // ARRANGE, ACT, ASSERT
         int newBalance = 100000;
         bankAccount.setBalance(newBalance);
@@ -118,7 +130,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canGetOverdraft(){
+    public void testGetOverdraft(){
         // ARRANGE, ACT, ASSERT
         int result = bankAccount.getOverdraft();
         int expected = 0;
@@ -126,12 +138,11 @@ public class BankAccountTest {
     }
 
     @Test
-    public void canSetOverdraft(){
+    public void testSetOverdraft(){
         // ARRANGE, ACT, ASSERT
         int newOverdraft = 123121;
         bankAccount.setOverdraft(newOverdraft);
         int result = bankAccount.getOverdraft();
         assertThat(result).isEqualTo(newOverdraft);
     }
-
 }

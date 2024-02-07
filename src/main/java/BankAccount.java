@@ -20,6 +20,11 @@ public class BankAccount {
         this.accountNumber = 12345678;
         this.balance = 0;
     }
+    // Class Methods
+
+    public void deposit(int depositAmount){
+        this.balance += depositAmount;
+    }
 
     // Getters and Setters
 
