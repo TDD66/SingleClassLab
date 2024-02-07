@@ -29,7 +29,7 @@ public class BankAccount {
     }
 
     public void withdrawal(int withdrawalAmount){
-        if(this.balance - withdrawalAmount >= 0 && withdrawalAmount > 0){
+        if(this.balance - withdrawalAmount >= -overdraft && withdrawalAmount > 0){
             this.balance -= withdrawalAmount;
         }
     }

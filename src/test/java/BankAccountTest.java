@@ -11,7 +11,7 @@ public class BankAccountTest {
     @BeforeEach
     public void setUp(){
         bankAccount = new BankAccount("FirstName", "LastName",
-                LocalDate.of(2001, 2, 12), false, 100);
+                LocalDate.of(2001, 2, 12), false, 0);
     }
 
     @Test
@@ -65,6 +65,28 @@ public class BankAccountTest {
         int newBalance = bankAccount.getBalance();
         bankAccount.withdrawal(withdrawalAmount);
         assertThat(newBalance).isEqualTo(originalBalance);
+    }
+
+    @Test
+    void testWithdrawalIntoOverdraft(){
+        bankAccount.setOverdraft(50);
+        int originalBalance = bankAccount.getBalance();
+        int withdrawalAmount = 40;
+        bankAccount.withdrawal(withdrawalAmount);
+        int result = bankAccount.getBalance() - originalBalance;
+        int expected = -40;
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void testWithdrawalPastOverdraft(){
+        bankAccount.setOverdraft(50);
+        int originalBalance = bankAccount.getBalance();
+        int withdrawalAmount = 60;
+        bankAccount.withdrawal(withdrawalAmount);
+        int result = bankAccount.getBalance() - originalBalance;
+        int expected = 0;
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -202,8 +224,7 @@ public class BankAccountTest {
     public void testGetOverdraft(){
         // ARRANGE, ACT, ASSERT
         int result = bankAccount.getOverdraft();
-        int expected = 100;
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isZero();
     }
 
     @Test
